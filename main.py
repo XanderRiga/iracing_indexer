@@ -1,16 +1,25 @@
-# This is a sample Python script.
+from pyracing import client as pyracing
+import os
+import asyncio
+import dotenv
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+dotenv.load_dotenv()
+
+class IracingIndexer:
+    def __init__(self):
+        self.pyracing = self.init_pyracing()
+
+    async def index_iracing(self):
+        all_series = await self.pyracing.current_seasons(series_id=True)
+        print('hello')
+
+    def init_pyracing(self):
+        return pyracing.Client(
+            os.getenv("IRACING_USERNAME"),
+            os.getenv("IRACING_PASSWORD")
+        )
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    indexer = IracingIndexer()
+    asyncio.run(indexer.index_iracing())

@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 pyracing = "~=0.1.1"
+python-dotenv = "~=0.15.0"
 
 [dev-packages]
 
